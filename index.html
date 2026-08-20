@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Alvena - Professional Ethereum Sepolia Testnet Wallet">
+
+    <title>Alvena Wallet</title>
+
+    <!-- Ethers.js v6 -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.15.0/dist/ethers.umd.min.js"></script>
+
+    <link rel="stylesheet"
+          href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APP
+    ====================================================== -->
+
+    <main class="app-shell">
+        <!-- GLOBAL ALVENA BRAND HEADER -->
+<header class="global-header">
+
+    <div class="global-brand">
+
+        <img src="assets/alvena-logo.png"
+             alt="Alvena Logo"
+             class="global-logo">
+
+        <div class="global-brand-text">
+
+            <div class="global-brand-name">
+                ALVENA
+            </div>
+
+            <div class="global-brand-network">
+                Sepolia Testnet
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+        <!-- =================================================
+                        WELCOME
+        ================================================== -->
+
+        <section id="welcomePage"
+                 class="page active-page">
+
+            <div class="welcome-container">
+
+                <p class="welcome-subtitle">
+                    Your simple and secure Web3 wallet
+                </p>
+
+                <div class="button-stack">
+
+                    <button class="main-button"
+                            onclick="goToCreateWallet()">
+                        Create Wallet
+                    </button>
+
+                    <button class="secondary-button"
+                            onclick="goToImportWallet()">
+                        Import Wallet
+                    </button>
+
+                </div>
+
+                <p class="network-label">
+                    Ethereum • Sepolia Testnet
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE 2 - CREATE WALLET
+        ================================================== -->
+
+        <section id="createPage"
+                 class="page">
+
+            <div class="content-container">
+
+                <div class="page-header">
+                    <h1>
+                        Create Your Wallet
+                    </h1>
+
+                    <p>
+                        Generate a new Ethereum wallet securely.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-card create-card">
+
+                    <p>
+                        Alvena will generate a new 12-word
+                        recovery phrase for your wallet.
+                    </p>
+
+                    <button class="main-button"
+                            onclick="generateWallet()">
+                        Generate Wallet
+                    </button>
+
+                </div>
+
+
+                <button class="back-button"
+                        onclick="showPage('welcomePage')">
+                    ← Back
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE 3 - SECRET RECOVERY PHRASE
+        ================================================== -->
+
+        <section id="phrasePage"
+                 class="page">
+
+            <div class="content-container phrase-page-container">
+
+                <div class="page-header">
+
+                    <h1>
+                        Secret Your Recovery Phrases
+                    </h1>
+
+                    <p>
+                        Keep these 12 words safe. They are the
+                        only way to recover this wallet.
+                    </p>
+
+                </div>
+
+
+                <div class="warning-box">
+
+                    <span class="warning-icon">
+                        ⚠
+                    </span>
+
+                    <div>
+                        <strong>
+                            Security warning
+                        </strong>
+
+                        <p>
+                            Never share your recovery phrase
+                            with anyone.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div id="phraseGrid"
+                     class="phrase-grid">
+                </div>
+
+
+                <div class="phrase-actions">
+
+                    <button class="secondary-action-button"
+                            onclick="copyRecoveryPhrase()">
+                        Copy Phrase
+                    </button>
+
+                </div>
+
+
+                <!-- Encrypted JSON save -->
+
+                <div class="save-wallet-card">
+
+                    <h3>
+                        Save Encrypted Wallet
+                    </h3>
+
+                    <p>
+                        Create a password to protect your
+                        downloadable JSON wallet file.
+                    </p>
+
+                    <input type="password"
+                           id="createPassword"
+                           class="text-input"
+                           placeholder="Enter a strong password">
+
+                    <input type="password"
+                           id="confirmCreatePassword"
+                           class="text-input"
+                           placeholder="Confirm password">
+
+                    <button class="main-button"
+                            onclick="downloadEncryptedWallet()">
+                        Download Encrypted JSON
+                    </button>
+
+                    <p id="saveWalletMessage"
+                       class="message">
+                    </p>
+
+                </div>
+
+
+                <button class="continue-button"
+                        onclick="goToRecoveryVerification()">
+                    Continue
+                </button>
+
+
+                <button class="back-button"
+                        onclick="showPage('createPage')">
+                    ← Back
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE 4 - RECOVERY PHRASE VERIFICATION
+        ================================================== -->
+
+        <section id="recoveryPage"
+                 class="page">
+
+            <div class="content-container">
+
+                <div class="page-header">
+
+                    <h1>
+                        Recover Your Phrases
+                    </h1>
+
+                    <p>
+                        Write your recovery phrases in this box.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-card verification-card">
+
+                    <h2>
+                        Verify your wallet
+                    </h2>
+
+                    <p>
+                        Enter the three requested words
+                        from your recovery phrase.
+                    </p>
+
+
+                    <div id="verificationInputs"
+                         class="verification-inputs">
+                    </div>
+
+
+                    <p id="verificationMessage"
+                       class="message">
+                    </p>
+
+
+                    <button class="main-button"
+                            onclick="confirmRecoveryPhrase()">
+                        Confirm Phrases
+                    </button>
+
+                </div>
+
+
+                <button class="back-button"
+                        onclick="showPage('phrasePage')">
+                    ← Back
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE 5 - WALLET CREATED
+        ================================================== -->
+
+        <section id="walletCreatedPage"
+                 class="page">
+
+            <div class="content-container">
+
+                <div class="success-header">
+
+                    <h1>
+                        Wallet
+                    </h1>
+
+                    <p>
+                        Your wallet was successfully created.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-card address-card">
+
+                    <label>
+                        Wallet Address
+                    </label>
+
+                    <div class="address-row">
+
+                        <span id="createdWalletAddress"
+                              class="address-text">
+                            -
+                        </span>
+
+                        <button class="copy-icon-button"
+                                onclick="copyCreatedAddress()">
+                            ⧉
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button class="main-button"
+                        onclick="openWalletDashboard()">
+                    Open Wallet
+                </button>
+
+
+                <button class="back-button"
+                        onclick="showPage('recoveryPage')">
+                    ← Back
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE 6 - IMPORT WALLET
+        ================================================== -->
+
+        <section id="importPage"
+                 class="page">
+
+            <div class="content-container">
+
+                <div class="page-header">
+
+                    <h1>
+                        Import Wallet
+                    </h1>
+
+                    <p>
+                        Enter your 12 recovery phrases.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-card import-card">
+
+                    <label for="importPhrase">
+                        Enter your 12 recovery phrases
+                    </label>
+
+                    <textarea id="importPhrase"
+                              class="phrase-textarea"
+                              placeholder="Enter your 12 words separated by spaces..."
+                              spellcheck="false"></textarea>
+
+
+                    <p class="small-security-text">
+                        Your phrase is processed locally in
+                        your browser.
+                    </p>
+
+
+                    <p id="importMessage"
+                       class="message">
+                    </p>
+
+
+                    <button class="main-button"
+                            onclick="importWallet()">
+                        Import Wallet
+                    </button>
+
+                </div>
+
+
+                <button class="back-button"
+                        onclick="showPage('welcomePage')">
+                    ← Back
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE 7 - DASHBOARD
+        ================================================== -->
+
+        <section id="dashboardPage"
+                 class="page dashboard-page">
+
+            <div class="dashboard-container">
+
+                <button class="logout-button"
+                     onclick="logoutWallet()">
+                        Logout
+                </button>
+
+
+                <!-- DASHBOARD CONTENT -->
+
+                <div class="dashboard-content">
+
+
+                    <!-- BALANCE -->
+
+                    <div class="balance-card">
+
+                        <div class="balance-top">
+
+                            <div>
+                                <span class="balance-label">
+                                    Total Balance
+                                </span>
+
+                                <h1 id="dashboardBalance">
+                                    0.000 ETH
+                                </h1>
+                            </div>
+                        </div>
+
+
+                        <div class="balance-bottom">
+
+                            <span>
+                                Ethereum Sepolia
+                            </span>
+
+                            <button class="refresh-button"
+                                    onclick="refreshBalance()">
+                                ↻ Refresh
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="dashboard-card address-dashboard-card">
+
+                        <div class="card-heading-row">
+
+                            <div>
+                                <span class="dashboard-card-label">
+                                    Your Wallet
+                                </span>
+
+                                <h3>
+                                    Wallet Address
+                                </h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="dashboard-address">
+
+                            <span id="dashboardAddress">
+                                -
+                            </span>
+
+                            <button class="copy-address-button"
+                                    onclick="copyDashboardAddress()">
+                                Copy
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SEND / RECEIVE -->
+
+                    <div class="action-grid">
+
+                        <button class="dashboard-action send-action"
+                                onclick="openSendPanel()">
+
+                            <span class="action-icon">
+                                ↑
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Send
+                                </strong>
+
+                                <small>
+                                    Send ETH
+                                </small>
+                            </div>
+
+                        </button>
+
+
+                        <button class="dashboard-action receive-action"
+                                onclick="openReceivePanel()">
+
+                            <span class="action-icon">
+                                ↓
+                            </span>
+
+                            <div>
+                                <strong>
+                                    Receive
+                                </strong>
+
+                                <small>
+                                    Receive ETH
+                                </small>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- NETWORK INFO -->
+
+                    <div class="network-card">
+
+                        <div class="network-status">
+                            <span class="online-dot"></span>
+
+                            <span>
+                                Connected
+                            </span>
+                        </div>
+
+                        <span>
+                            Ethereum Sepolia Testnet
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEND PANEL
+        ================================================== -->
+
+        <div id="sendPanel"
+             class="overlay">
+
+            <div class="modal-card">
+
+                <button class="close-button"
+                        onclick="closeSendPanel()">
+                    ×
+                </button>
+
+                <div class="modal-icon">
+                    ↑
+                </div>
+
+                <h2>
+                    Send ETH
+                </h2>
+
+                <p>
+                    Send Sepolia ETH to another Ethereum address.
+                </p>
+
+
+                <label>
+                    Wallet Address
+                </label>
+
+                <input type="text"
+                       id="recipientAddress"
+                       class="text-input"
+                       placeholder="0x...">
+
+
+                <label>
+                    Amount (ETH)
+                </label>
+
+                <input type="number"
+                       id="sendAmount"
+                       class="text-input"
+                       placeholder="0.001"
+                       min="0"
+                       step="0.000001">
+
+
+                <p id="sendMessage"
+                   class="message">
+                </p>
+
+
+                <button class="main-button"
+                        onclick="sendETH()">
+                    Send ETH
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RECEIVE PANEL
+        ================================================== -->
+
+        <div id="receivePanel"
+             class="overlay">
+
+            <div class="modal-card">
+
+                <button class="close-button"
+                        onclick="closeReceivePanel()">
+                    ×
+                </button>
+
+                <div class="modal-icon receive-modal-icon">
+                    ↓
+                </div>
+
+                <h2>
+                    Receive ETH
+                </h2>
+
+                <p>
+                    Share this wallet address to receive
+                    Sepolia ETH.
+                </p>
+
+
+                <div class="receive-address-box">
+
+                    <span id="receiveAddress">
+                        -
+                    </span>
+
+                </div>
+
+
+                <button class="secondary-action-button"
+                        onclick="copyReceiveAddress()">
+                    Copy Address
+                </button>
+
+
+                <p class="receive-warning">
+                    Only send assets compatible with the
+                    Ethereum Sepolia testnet to this address.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOAST
+        ================================================== -->
+
+        <div id="toast"
+             class="toast">
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

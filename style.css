@@ -1,0 +1,2325 @@
+/* =========================================================
+   ALVENA WALLET
+   DEEP PURPLE + NEON VIOLET
+   COLOUR CHANGE ONLY
+========================================================= */
+
+:root {
+
+    /* =====================================================
+       MAIN COLORS
+    ===================================================== */
+
+    --bg: #090612;
+
+    --surface: #EDE6FA;
+    --surface-light: #1B1230;
+
+    --border: #3A275C;
+
+    /* =====================================================
+       ALVENA BRAND
+    ===================================================== */
+
+    --primary: #A855F7;
+    --primary-hover: #7C3AED;
+    --primary-light: #2A1A45;
+
+    /* =====================================================
+       TEXT
+    ===================================================== */
+
+    --text: #FAF7FF;
+    --text-secondary: #B9A8D4;
+    --muted: #8E7AAE;
+
+    /* =====================================================
+       CARDS / INPUTS
+    ===================================================== */
+
+    --wallet-card: #1B1230;
+    --input: #EDE6FA;
+    --input-text: #2A1A45;
+    --input-text-secondary: #7C6B99;
+
+    /* =====================================================
+       STATUS COLORS
+    ===================================================== */
+
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --danger: #F43F5E;
+
+    /* =====================================================
+       BUTTON SIZE
+       ORIGINAL VALUES — DO NOT CHANGE
+    ===================================================== */
+
+    --button-width: 300px;
+    --button-height: 56px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   GLOBAL ALVENA HEADER
+========================================================= */
+
+.global-header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-left: 24px;
+
+    z-index: 1000;
+
+    background: #1B1230;
+
+    border-bottom: none;
+
+    box-shadow:
+        none;
+}
+
+
+.global-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.global-logo {
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+
+    display: block;
+
+    border-radius: 12px;
+
+    flex-shrink: 0;
+}
+
+
+.global-brand-text {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.global-brand-name {
+    color: var(--text);
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    line-height: 1.1;
+}
+
+
+.global-brand-network {
+    color: var(--text-secondary);
+
+    font-size: 13px;
+
+    margin-top: 5px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app-shell {
+    padding-top: 90px;
+    background: #1B1230;
+}
+
+
+/* =========================================================
+   PAGE SYSTEM
+========================================================= */
+
+.page {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 24px;
+    align-items: flex-start;
+    background: #090612;
+}
+
+
+.page.active-page {
+    display: flex;
+}
+
+
+/* =========================================================
+   WELCOME PAGE
+========================================================= */
+
+#welcomePage {
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.welcome-container {
+    width: 100%;
+
+    max-width: 700px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.alvena-logo {
+    width: 64px;
+    height: 64px;
+
+    object-fit: contain;
+
+    display: block;
+
+    position: fixed;
+
+    top: 20px;
+    left: 24px;
+
+    margin: 0;
+
+    border-radius: 12px;
+
+    z-index: 1000;
+
+    filter:
+        drop-shadow(
+            0 8px 18px
+            rgba(168, 85, 247, 0.12)
+        );
+}
+
+
+/* =========================================================
+   BRAND NAME
+========================================================= */
+
+.brand-name {
+    position: fixed;
+
+    top: 30px;
+    left: 102px;
+
+    margin: 0;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: var(--text);
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   WELCOME TEXT
+========================================================= */
+
+.welcome-subtitle {
+    color: var(--text-secondary);
+
+    font-size: 17px;
+
+    margin-bottom: 45px;
+}
+
+
+.network-label {
+    margin-top: 30px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BUTTON SYSTEM
+========================================================= */
+
+.main-button,
+.secondary-button,
+.continue-button {
+
+    width: var(--button-width);
+
+    height: var(--button-height);
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.main-button {
+
+    background: var(--primary);
+
+    color: #FAF7FF;
+
+    border: none;
+
+    box-shadow:
+        0 8px 20px
+        rgba(168, 85, 247, 0.16);
+}
+
+
+.main-button:hover {
+
+    background: var(--primary-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(168, 85, 247, 0.22);
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.secondary-button {
+
+    background: #1B1230;
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+}
+
+
+.secondary-button:hover {
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    border-color: var(--primary);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+.continue-button {
+
+    background: var(--primary);
+
+    color: #FAF7FF;
+
+    border: none;
+
+    margin-top: 20px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(168, 85, 247, 0.16);
+}
+
+
+.continue-button:hover {
+
+    background: var(--primary-hover);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DISABLED
+========================================================= */
+
+.main-button:disabled,
+.secondary-button:disabled,
+.continue-button:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   BUTTON STACK
+========================================================= */
+
+.button-stack {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CONTENT CONTAINER
+========================================================= */
+
+.content-container {
+
+    width: 100%;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    padding-top: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+
+    width: 100%;
+
+    height: 130px;
+
+    text-align: center;
+
+    margin: 0 0 30px 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    flex-shrink: 0;
+}
+
+
+.page-header h1 {
+
+    margin: 0 0 12px 0;
+
+    font-size: 38px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: #FFFFFF;
+
+    text-align: center;
+}
+
+
+.page-header p {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: var(--text-secondary);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   GLASS CARD
+========================================================= */
+
+.glass-card {
+
+    width: 100%;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    box-shadow:
+       0 3px 10px
+    rgba(124, 58, 237, 0.04);
+      
+
+    padding: 42px;
+}
+
+
+/* =========================================================
+   CREATE CARD
+========================================================= */
+
+.create-card {
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.card-icon,
+.verify-icon {
+
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--primary-light);
+
+    border:
+        1px solid
+        rgba(168, 85, 247, 0.16);
+
+    color: var(--primary);
+
+    font-size: 32px;
+
+    margin-bottom: 22px;
+}
+
+
+.create-card h2,
+.verification-card h2 {
+
+    font-size: 25px;
+
+    margin-bottom: 12px;
+
+    color: var(--input-text);
+}
+
+
+.create-card p,
+.verification-card > p {
+
+    color: var(--input-text-secondary);
+
+    line-height: 1.7;
+
+    max-width: 520px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+
+    width: var(--button-width);
+
+    height: var(--button-height);
+
+    margin-top: 18px;
+
+    border-radius: 12px;
+
+    background: #1B1230;
+
+    border: 1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.back-button:hover {
+
+    color: var(--primary);
+
+    border-color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.warning-box {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    margin-bottom: 22px;
+
+    border-radius: 14px;
+
+    background:
+        #241A08;
+
+    border:
+        1px solid
+        #8A6A1F;
+}
+
+
+.warning-icon {
+
+    font-size: 24px;
+
+    color: var(--warning);
+}
+
+
+.warning-box strong {
+
+    font-size: 14px;
+}
+
+
+.warning-box p {
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   PHRASE GRID
+========================================================= */
+
+.phrase-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+
+.phrase-word {
+
+    min-height: 75px;
+
+    background: var(--surface-light);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.phrase-word:hover {
+
+    border-color: #C084FC;
+
+    background: #2A1A45;
+}
+
+
+.phrase-number {
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+
+.phrase-text {
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+.phrase-actions {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 22px;
+}
+
+
+.secondary-action-button {
+
+    width: var(--button-width);
+
+    height: var(--button-height);
+
+    border-radius: 12px;
+
+    background: #1B1230;
+
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.secondary-action-button:hover {
+
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    background: var(--primary-light);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SAVE ENCRYPTED WALLET
+========================================================= */
+
+.save-wallet-card {
+
+    width: 100%;
+
+    background: #1B1230;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    margin-top: 22px;
+
+    box-shadow:
+        0 4px 15px
+    rgba(124, 58, 237, 0.06);
+}
+
+
+.save-wallet-card h3 {
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+
+.save-wallet-card > p {
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.text-input {
+
+    width: 100%;
+
+    height: 56px;
+
+    padding: 0 16px;
+
+    margin-bottom: 12px;
+
+    background: var(--input);
+
+    color: var(--input-text);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.text-input:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(168, 85, 247, 0.10);
+}
+
+
+.text-input::placeholder {
+
+    color: #8E7AAE;
+}
+
+
+.message {
+
+    min-height: 22px;
+
+    color: var(--success);
+
+    font-size: 14px;
+
+    text-align: center;
+
+    margin: 12px 0;
+}
+
+
+/* =========================================================
+   VERIFICATION
+========================================================= */
+
+.verification-card {
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.verification-inputs {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+
+.verification-item {
+
+    text-align: left;
+}
+
+
+.verification-item label {
+
+    display: block;
+
+    color: var(--input-text-secondary);
+
+    font-size: 12px;
+
+    margin-bottom: 7px;
+}
+
+
+.verification-item input {
+
+    width: 100%;
+
+    height: 56px;
+
+    padding: 0 14px;
+
+    background: var(--input);
+
+    color: var(--input-text);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+
+.verification-item input:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+       0 4px 15px
+    rgba(124, 58, 237, 0.06);
+}
+
+
+/* =========================================================
+   SUCCESS PAGE
+========================================================= */
+
+.success-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.success-circle {
+
+    width: 85px;
+    height: 85px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #F0FDF4;
+
+    border:
+        1px solid
+        #BBF7D0;
+
+    color: var(--success);
+
+    font-size: 38px;
+}
+
+
+.success-label {
+
+    color: var(--success);
+}
+
+
+.success-header h1 {
+
+    font-size: 40px;
+
+    margin-bottom: 8px;
+
+    color: #FFFFFF;
+}
+
+
+.success-header p {
+
+    color: var(--text-secondary);
+}
+
+
+/* =========================================================
+   ADDRESS CARD
+========================================================= */
+
+.address-card {
+
+    margin-bottom: 20px;
+}
+
+
+.address-card label {
+
+    display: block;
+
+    color: var(--input-text-secondary);
+
+    font-size: 13px;
+
+    margin-bottom: 10px;
+}
+
+
+.address-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.address-text {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 15px;
+
+    background: var(--input);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    color: var(--input-text);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 13px;
+
+    word-break: break-all;
+}
+
+
+.copy-icon-button {
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: var(--primary);
+
+    color: #FAF7FF;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    transition: 0.2s ease;
+}
+
+
+.copy-icon-button:hover {
+
+    background: var(--primary-hover);
+}
+
+
+/* =========================================================
+   IMPORT
+========================================================= */
+
+.import-card label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 10px;
+
+    color: var(--input-text);
+}
+
+
+.phrase-textarea {
+
+    width: 100%;
+
+    height: 180px;
+
+    resize: vertical;
+
+    padding: 18px;
+
+    background: var(--input);
+
+    color: var(--input-text);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+.phrase-textarea:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 4px 15px
+        rgba(124, 58, 237, 0.06);
+}
+
+
+.small-security-text {
+
+    color: var(--input-text-secondary);
+
+    font-size: 12px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard-page {
+
+    padding: 0;
+}
+
+
+.dashboard-container {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.dashboard-header {
+
+    width: 100%;
+
+    min-height: 90px;
+
+    padding:
+        20px
+        40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        none;
+
+    background:
+        #1B1230;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 20;
+
+    box-shadow:
+        none;
+}
+
+
+.dashboard-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.dashboard-logo {
+
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+
+.dashboard-brand h2 {
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+}
+
+
+.dashboard-brand span {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-button {
+
+    width: 130px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--danger);
+
+    color: #FAF7FF;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: block;
+
+    margin-left: auto;
+
+    margin-bottom: 30px;
+
+    margin-right: 20px;
+
+    transition: 0.2s ease;
+}
+
+
+.logout-button:hover {
+
+    opacity: 0.92;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   DASHBOARD CONTENT
+========================================================= */
+
+.dashboard-content {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding:
+        45px
+        30px
+        60px;
+}
+
+
+/* =========================================================
+   BALANCE CARD
+========================================================= */
+
+.balance-card {
+
+    width: 100%;
+
+    min-height: 250px;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    background: #1B1230;
+
+    border:
+        1px solid
+        var(--border);
+
+    box-shadow:
+       0 4px 15px
+        rgba(124, 58, 237, 0.06);
+
+    margin-bottom: 22px;
+}
+
+
+.balance-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.balance-label {
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+}
+
+
+.balance-card h1 {
+
+    font-size:
+        clamp(42px, 6vw, 68px);
+
+    line-height: 1;
+
+    margin-top: 15px;
+
+    letter-spacing: -2px;
+
+    color: var(--text);
+}
+
+
+.eth-symbol {
+
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background:
+        var(--primary-light);
+
+    border:
+        1px solid
+        #DBEAFE;
+
+    color: var(--primary);
+
+    font-size: 45px;
+}
+
+
+.balance-bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 60px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+.refresh-button {
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        #1B1230;
+
+    color: var(--text);
+
+    border-radius: 10px;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+
+.refresh-button:hover {
+
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+/* =========================================================
+   DASHBOARD CARD
+========================================================= */
+
+.dashboard-card {
+
+    width: 100%;
+
+    background: var(--wallet-card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+     0 4px 16px
+     rgba(124, 58, 237, 0.06);
+}
+
+
+.card-heading-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.dashboard-card-label {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+
+.card-heading-row h3 {
+
+    font-size: 20px;
+
+    color: var(--text);
+}
+
+
+.status-dot {
+
+    color: var(--success);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   DASHBOARD ADDRESS
+========================================================= */
+
+.dashboard-address {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: var(--input);
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding: 15px;
+}
+
+
+.dashboard-address span {
+
+    flex: 1;
+
+    min-width: 0;
+
+    color: var(--input-text-secondary);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 13px;
+
+    word-break: break-all;
+}
+
+
+.copy-address-button {
+
+    flex-shrink: 0;
+
+    height: 40px;
+
+    padding:
+        0 16px;
+
+    background: var(--primary);
+
+    color: #FAF7FF;
+
+    border: none;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.copy-address-button:hover {
+
+    background: var(--primary-hover);
+}
+
+
+/* =========================================================
+   SEND / RECEIVE
+========================================================= */
+
+.action-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+
+.dashboard-action {
+
+    min-height: 115px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    background: var(--surface-light);
+
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: 0.2s ease;
+
+    box-shadow:
+        0 4px 14px
+    rgba(124, 58, 237, 0.05);
+}
+
+
+.dashboard-action:hover {
+
+    transform: translateY(-3px);
+
+    border-color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+.action-icon {
+
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: var(--primary-light);
+
+    border:
+        1px solid
+        rgba(168, 85, 247, 0.12);
+
+    color: var(--primary);
+
+    font-size: 25px;
+}
+
+
+.dashboard-action strong {
+
+    display: block;
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+
+    color: var(--text);
+}
+
+
+.dashboard-action small {
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   NETWORK CARD
+========================================================= */
+
+.network-card {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 18px 20px;
+
+    background: #1B1230;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+.network-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--success);
+}
+
+
+.online-dot {
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    box-shadow:
+        0 0 8px
+        rgba(22, 163, 74, 0.30);
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        rgba(15, 23, 42, 0.45);
+
+    backdrop-filter: blur(8px);
+}
+
+
+.overlay.active {
+
+    display: flex;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-card {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    background: #1B1230;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    box-shadow:
+       0 4px 15px
+        rgba(124, 58, 237, 0.06);
+}
+
+
+.close-button {
+
+    position: absolute;
+
+    right: 18px;
+    top: 18px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: var(--surface-light);
+
+    color: var(--text-secondary);
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+.close-button:hover {
+
+    color: var(--text);
+
+    background: #EEF2F7;
+}
+
+
+.modal-icon {
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: var(--primary-light);
+
+    border:
+        1px solid
+        rgba(168, 85, 247, 0.12);
+
+    color: var(--primary);
+
+    font-size: 30px;
+
+    margin-bottom: 20px;
+}
+
+
+.receive-modal-icon {
+
+    color: var(--success);
+
+    background:
+        #F0FDF4;
+}
+
+
+.modal-card h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+.modal-card > p {
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+.modal-card label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   RECEIVE
+========================================================= */
+
+.receive-address-box {
+
+    width: 100%;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+
+    background: var(--input);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+}
+
+
+.receive-address-box span {
+
+    color: var(--input-text);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    word-break: break-all;
+}
+
+
+.receive-warning {
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+
+    position: fixed;
+
+    bottom: 30px;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, 100px);
+
+    z-index: 200;
+
+    padding: 14px 22px;
+
+    background: #1B1230;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+       0 4px 15px
+        rgba(124, 58, 237, 0.06);
+}
+
+
+.toast.show {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .dashboard-header {
+
+        padding:
+            18px
+            22px;
+    }
+
+
+    .dashboard-content {
+
+        padding:
+            30px
+            20px
+            50px;
+    }
+
+
+    .page {
+
+        padding:
+            30px
+            18px;
+    }
+
+
+    .page-header h1 {
+
+        font-size: 32px;
+    }
+
+
+    .glass-card {
+
+        padding:
+            28px
+            20px;
+    }
+
+
+    .phrase-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    :root {
+
+        --button-width: 100%;
+
+        --button-height: 75px;
+    }
+
+
+    .alvena-logo {
+
+        width: 56px;
+        height: 56px;
+    }
+
+
+    .brand-name {
+
+        font-size: 34px;
+
+        letter-spacing: 6px;
+    }
+
+
+    .welcome-subtitle {
+
+        font-size: 15px;
+
+        margin-bottom: 32px;
+    }
+
+
+    .phrase-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 9px;
+    }
+
+
+    .phrase-word {
+
+        min-height: 68px;
+
+        padding: 10px;
+    }
+
+
+    .phrase-text {
+
+        font-size: 13px;
+    }
+
+
+    .verification-inputs {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .address-row {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .copy-icon-button {
+
+        width: 100%;
+    }
+
+
+    .balance-card {
+
+        padding: 25px;
+    }
+
+
+    .balance-card h1 {
+
+        font-size: 42px;
+    }
+
+
+    .eth-symbol {
+
+        width: 55px;
+        height: 55px;
+
+        font-size: 32px;
+    }
+
+
+    .balance-bottom {
+
+        margin-top: 45px;
+    }
+
+
+    .action-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .network-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+    }
+
+
+    .dashboard-brand h2 {
+
+        font-size: 15px;
+    }
+
+
+    .logout-button {
+
+        width: 90px;
+
+        margin-right: 10px;
+    }
+
+
+    .modal-card {
+
+        padding:
+            28px
+            20px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .phrase-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .dashboard-header {
+
+        padding: 15px;
+    }
+
+
+    .dashboard-content {
+
+        padding:
+            25px
+            15px
+            40px;
+    }
+}
