@@ -30,6 +30,93 @@ let verificationIndexes = [];
 let encryptedWalletJson = null;
 
 
+const STORAGE_KEY = "alvenaWallet";
+
+
+function saveWalletToLocalStorage() {
+
+    if (!wallet) return;
+
+
+    const walletData = {
+
+        address: wallet.address,
+
+        privateKey: wallet.privateKey,
+
+        publicKey: wallet.signingKey.publicKey,
+
+        mnemonic: wallet.mnemonic.phrase
+
+    };
+
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(walletData)
+    );
+
+}
+
+
+
+function loadWalletFromLocalStorage() {
+
+    const savedWallet =
+        localStorage.getItem(STORAGE_KEY);
+
+
+    if(!savedWallet)
+        return false;
+
+
+    try {
+
+        const data =
+            JSON.parse(savedWallet);
+
+
+        wallet =
+            ethers.Wallet.fromPhrase(
+                data.mnemonic
+            );
+
+
+        initializeProvider();
+
+
+        wallet =
+            wallet.connect(provider);
+
+
+        recoveryPhrase =
+            data.mnemonic.split(" ");
+
+
+        return true;
+
+
+    } catch(error){
+
+        console.error(error);
+
+        return false;
+
+    }
+
+}
+
+
+
+function removeWalletFromLocalStorage(){
+
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
+
+}
+
+
 /* =========================================================
    INITIALIZE PROVIDER
 ========================================================= */
@@ -181,7 +268,7 @@ function generateWallet() {
             );
 
         }
-
+        saveWalletToLocalStorage();
 
         displayRecoveryPhrase();
 
@@ -300,7 +387,8 @@ function downloadEncryptedWallet() {
     const walletData = {
         address: wallet.address,
         privateKey: wallet.privateKey,
-        publicKey: wallet.signingKey.publicKey
+        publicKey: wallet.signingKey.publicKey,
+        mnemonic:wallet.mnemonic.phrase
     };
 
     const json = JSON.stringify(walletData, null, 2);
@@ -800,6 +888,7 @@ function importWallet() {
             wallet.connect(
                 provider
             );
+        saveWalletToLocalStorage();    
 
 
         showMessage(
@@ -1217,7 +1306,7 @@ function logoutWallet() {
      * The encrypted JSON file downloaded earlier
      * remains on the user's device.
      */
-
+    removeWalletFromLocalStorage();
     wallet = null;
 
     provider = null;
@@ -1481,13 +1570,34 @@ document.addEventListener(
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    async function(){
 
         initializeProvider();
 
-        showPage(
-            "welcomePage"
-        );
+
+        const walletExists =
+            loadWalletFromLocalStorage();
+
+
+
+        if(walletExists){
+
+            updateDashboardAddress();
+
+            showPage(
+                "dashboardPage"
+            );
+
+            await refreshBalance();
+
+
+        }else{
+
+            showPage(
+                "welcomePage"
+            );
+
+        }
 
     }
 );
