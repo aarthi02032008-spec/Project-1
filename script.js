@@ -268,7 +268,7 @@ function generateWallet() {
             );
 
         }
-        saveWalletToLocalStorage();
+    
 
         displayRecoveryPhrase();
 
@@ -615,7 +615,7 @@ function confirmRecoveryPhrase() {
     setTimeout(
         () => {
 
-            showWalletCreatedPage();
+            showPage("passwordPage");
 
         },
         700

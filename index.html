@@ -303,9 +303,65 @@
 
         </section>
 
+<!-- =================================================
+     PAGE 5 - CREATE PASSWORD
+================================================== -->
 
+<section id="passwordPage"
+         class="page">
+
+    <div class="content-container">
+
+        <div class="page-header">
+
+            <h1>
+                Create Password
+            </h1>
+
+            <p>
+                Create a password to protect your wallet.
+            </p>
+
+        </div>
+
+        <div class="glass-card">
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="walletPassword"
+                class="text-input"
+                placeholder="Enter your password">
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmWalletPassword"
+                class="text-input"
+                placeholder="Confirm your password">
+
+            <p id="passwordMessage"
+               class="message">
+            </p>
+
+            <button class="main-button"
+                    onclick="createWalletPassword()">
+                Create Password
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
         <!-- =================================================
-             PAGE 5 - WALLET CREATED
+             PAGE 6 - WALLET CREATED
         ================================================== -->
 
         <section id="walletCreatedPage"
@@ -366,7 +422,7 @@
 
 
         <!-- =================================================
-             PAGE 6 - IMPORT WALLET
+             PAGE 7 - IMPORT WALLET
         ================================================== -->
 
         <section id="importPage"
