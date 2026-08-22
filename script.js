@@ -62,47 +62,13 @@ function saveWalletToLocalStorage() {
 
 function loadWalletFromLocalStorage() {
 
-    const savedWallet =
-        localStorage.getItem(STORAGE_KEY);
+    const savedWallet = localStorage.getItem(STORAGE_KEY);
 
-
-    if(!savedWallet)
+    if (!savedWallet) {
         return false;
-
-
-    try {
-
-        const data =
-            JSON.parse(savedWallet);
-
-
-        wallet =
-            ethers.Wallet.fromPhrase(
-                data.mnemonic
-            );
-
-
-        initializeProvider();
-
-
-        wallet =
-            wallet.connect(provider);
-
-
-        recoveryPhrase =
-            data.mnemonic.split(" ");
-
-
-        return true;
-
-
-    } catch(error){
-
-        console.error(error);
-
-        return false;
-
     }
+
+    return true;
 
 }
 
@@ -1465,23 +1431,13 @@ async function unlockWallet() {
             "Please enter your password.";
 
         return;
+
     }
 
     try {
 
         const encryptedWallet =
             localStorage.getItem(STORAGE_KEY);
-
-        if (!encryptedWallet) {
-
-            message.textContent =
-                "Wallet not found.";
-
-            return;
-        }
-
-        message.textContent =
-            "Unlocking wallet...";
 
         initializeProvider();
 
@@ -1493,9 +1449,6 @@ async function unlockWallet() {
 
         wallet =
             wallet.connect(provider);
-
-        recoveryPhrase =
-            wallet.mnemonic.phrase.split(" ");
 
         updateDashboardAddress();
 
@@ -1715,30 +1668,18 @@ document.addEventListener(
 
         initializeProvider();
 
+    const walletExists = loadWalletFromLocalStorage();
 
-        const walletExists =
-            loadWalletFromLocalStorage();
+    if (walletExists) {
 
+         showPage("unlockPage");
 
+    } else {
 
-        if(walletExists){
+        showPage("welcomePage");
 
-            updateDashboardAddress();
+    }
 
-            showPage(
-                "dashboardPage"
-            );
-
-            await refreshBalance();
-
-
-        }else{
-
-            showPage(
-                "welcomePage"
-            );
-
-        }
-
+          
     }
 );
