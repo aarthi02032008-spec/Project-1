@@ -287,6 +287,100 @@ function generateWallet() {
 
 }
 
+/* =========================================================
+   CREATE WALLET PASSWORD
+========================================================= */
+
+async function createWalletPassword() {
+
+    const password =
+        document.getElementById("walletPassword").value;
+
+    const confirmPassword =
+        document.getElementById("confirmWalletPassword").value;
+
+    const message =
+        document.getElementById("passwordMessage");
+
+
+    if (!password || !confirmPassword) {
+
+        message.textContent =
+            "Please enter your password.";
+
+        return;
+    }
+
+
+    if (password !== confirmPassword) {
+
+        message.textContent =
+            "Passwords do not match.";
+
+        return;
+    }
+
+
+    if (password.length < 8) {
+
+        message.textContent =
+            "Password must contain at least 8 characters.";
+
+        return;
+    }
+
+
+    if (!wallet) {
+
+        message.textContent =
+            "Wallet not found. Please create the wallet again.";
+
+        return;
+    }
+
+
+    try {
+
+        message.textContent =
+            "Encrypting wallet...";
+
+
+        const encryptedWallet =
+            await wallet.encrypt(password);
+
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            encryptedWallet
+        );
+
+
+        encryptedWalletJson =
+            encryptedWallet;
+
+
+        message.textContent =
+            "Password created successfully.";
+
+
+        setTimeout(() => {
+
+            showWalletCreatedPage();
+
+        }, 700);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Unable to encrypt wallet.";
+
+    }
+}
+
+
 
 /* =========================================================
    DISPLAY 12 WORDS
@@ -888,7 +982,7 @@ function importWallet() {
             wallet.connect(
                 provider
             );
-        saveWalletToLocalStorage();    
+    
 
 
         showMessage(
@@ -1353,7 +1447,72 @@ function logoutWallet() {
 
 }
 
+/* =========================================================
+   UNLOCK WALLET
+========================================================= */
 
+async function unlockWallet() {
+
+    const password =
+        document.getElementById("unlockPassword").value;
+
+    const message =
+        document.getElementById("unlockMessage");
+
+    if (!password) {
+
+        message.textContent =
+            "Please enter your password.";
+
+        return;
+    }
+
+    try {
+
+        const encryptedWallet =
+            localStorage.getItem(STORAGE_KEY);
+
+        if (!encryptedWallet) {
+
+            message.textContent =
+                "Wallet not found.";
+
+            return;
+        }
+
+        message.textContent =
+            "Unlocking wallet...";
+
+        initializeProvider();
+
+        wallet =
+            await ethers.Wallet.fromEncryptedJson(
+                encryptedWallet,
+                password
+            );
+
+        wallet =
+            wallet.connect(provider);
+
+        recoveryPhrase =
+            wallet.mnemonic.phrase.split(" ");
+
+        updateDashboardAddress();
+
+        showPage("dashboardPage");
+
+        refreshBalance();
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Incorrect password.";
+
+    }
+
+}
 /* =========================================================
    MESSAGE HELPERS
 ========================================================= */
@@ -1503,37 +1662,19 @@ function escapeHtml(value) {
 ========================================================= */
 
 document.addEventListener(
-    "click",
-    function(event) {
+    "DOMContentLoaded",
+    function () {
 
-        const sendPanel =
-            document.getElementById(
-                "sendPanel"
-            );
+        const encryptedWallet =
+            localStorage.getItem(STORAGE_KEY);
 
+        if (encryptedWallet) {
 
-        const receivePanel =
-            document.getElementById(
-                "receivePanel"
-            );
+            showPage("unlockPage");
 
+        } else {
 
-        if (
-            event.target ===
-            sendPanel
-        ) {
-
-            closeSendPanel();
-
-        }
-
-
-        if (
-            event.target ===
-            receivePanel
-        ) {
-
-            closeReceivePanel();
+            showPage("welcomePage");
 
         }
 
